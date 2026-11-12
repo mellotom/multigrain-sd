@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>multigrain-sd · travelers guide for navigating the grain archive</title>
+<meta name="description" content="intellijel multigrain microsd card database: every project folder and sample on the card, searchable by project, category, key and pack.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&amp;family=Roboto+Mono:wght@400;500;600;700&amp;display=swap">
+<script>(function(){var r=document.documentElement,v=null;try{v=localStorage.getItem('hn-mode');}catch(e){}if(v!=='light'&&v!=='dark'){var h=new Date().getHours();v=(h>=7&&h<19)?'light':'dark';}if(v==='dark')r.setAttribute('data-theme','alt');})();</script>
+<style>
+/*CSS*/
+.c-proj{width:150px}.c-pos{width:44px}.c-cat{width:122px}.c-key{width:58px}.c-bpm{width:50px}.c-pack{width:24%}.c-sec{width:56px}
+.pj{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:0 0 10px;border-top:3px solid var(--kc);min-width:0}
+.pj:hover .kn,.pj[aria-pressed="true"] .kn{color:var(--kc)}
+.pj[aria-pressed="true"]{background:var(--bg2)}
+.pj:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.bankrow{display:flex;gap:4px;padding:0 4px}
+.bankrow i{flex:1;height:8px;background:var(--ln)}
+.bankrow i.on{background:var(--kc)}
+.empties{font-family:'Roboto Mono',monospace;font-size:10.5px;color:var(--mu);margin:10px 0 0}
+td.key{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--fg)}
+@media (max-width:899px){
+tr{grid-template-columns:44px 92px minmax(0,1fr);grid-template-areas:'n c f' 'x x x' 'p p p'}
+td.key,td.bpm{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<span class="crop tl" aria-hidden="true"></span><span class="crop tr" aria-hidden="true"></span>
+
+<div class="slugs">
+  <div>
+    <div><b>multigrain-sd</b> <span class="dots">...............</span> microsd · fat32</div>
+    <div>folders <span class="dots">....................</span> /Multigrain/ProjectXX</div>
+  </div>
+  <div class="tmline">
+    <div class="rets"><a class="tm ret" href="https://mellotom.github.io/multigrain-navigator/"><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true" style="display:block;flex:none"><path d="M13.2 4.5 H1.6 M5.1 1 L1.6 4.5 L5.1 8" fill="none" stroke="currentColor" stroke-width="1.3"></path></svg><span>return to multigrain</span></a><span class="dots">·</span><a class="tm ret" href="https://mellotom.github.io/travelers-guide/"><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true" style="display:block;flex:none"><path d="M13.2 4.5 H1.6 M5.1 1 L1.6 4.5 L5.1 8" fill="none" stroke="currentColor" stroke-width="1.3"></path></svg><span>return to welcome center</span></a></div>
+    <div>mode <span class="dots">.......................</span> <button type="button" class="tm" data-t="native" aria-pressed="false">light</button>/<button type="button" class="tm" data-t="alt" aria-pressed="false">dark</button></div>
+    <div>data <span class="dots">.......................</span> <a href="data.json">data.json</a></div>
+  </div>
+  <div>
+    <div>source <span class="dots">..........</span> <a href="https://intellijel.com/shop/eurorack/multigrain/">multigrain manual 1.4</a></div>
+    <div>rev <span class="dots">...........................</span> <span id="rev">—</span></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div>
+    <h1>multigrain</h1>
+    <p class="sub"><span>_travelers guide</span><span class="acc">_for navigating the grain archive</span></p>
+    <div class="bar" aria-hidden="true"></div>
+  </div>
+  <div>
+    <div class="stats">
+      <div class="stat"><b id="st-proj">—</b><span>projects</span></div>
+      <div class="stat"><b id="st-n">—</b><span>samples</span></div>
+      <div class="stat"><b id="st-p">—</b><span>source packs</span></div>
+      <div class="stat"><b id="st-c">—</b><span>categories</span></div>
+    </div>
+    <div class="legendline"><span class="b">alt › [ project ]</span> picks the project · <span class="b">[ /project ]</span> + <span class="b">[ ‹prev · next› ]</span> step through its files · # below = position in that folder</div>
+  </div>
+</div>
+
+<div class="stripes" aria-hidden="true"><div style="background:#70C057"></div><div style="background:#FFDE16"></div><div style="background:#FCAF17"></div><div style="background:#ED2B43"></div><div style="background:#00AEEF"></div><div style="background:#B668AA"></div><div style="background:var(--mu)"></div><div style="background:var(--fg)"></div><div style="background:#5A5A5A"></div></div>
+
+<div class="strip"><span>one folder per project · files indexed alphabetically · prefix keeps each category together</span><span>every file · .wav · 48 khz · 16-bit · stereo · ≤ 32 s</span><span>tap a project to filter the database</span></div>
+
+<main class="grid">
+
+<section class="sec s-proj" aria-labelledby="h-proj">
+  <div class="sh"><span class="sn" style="background:#00AEEF;color:#101010">01</span><h2 class="st" id="h-proj">projects</h2><span class="sc">mgs_01 · /Multigrain/ProjectXX on the card</span></div>
+  <div class="kits" id="proj"></div>
+  <p class="empties" id="empties" hidden></p>
+</section>
+
+<section class="sec s-cats" aria-labelledby="h-cats">
+  <div class="sh"><span class="sn" style="background:#70C057;color:#101010">02</span><h2 class="st" id="h-cats">category map</h2><span class="sc">mgs_02 · file-name prefix</span></div>
+  <div id="cats"></div>
+  <p class="note">the prefix and two-digit number keep each category together and in order, so stepping through /project stays inside one sound family.</p>
+</section>
+
+<section class="sec s-load" aria-labelledby="h-load">
+  <div class="sh"><span class="sn" style="background:#FCAF17;color:#101010">03</span><h2 class="st" id="h-load">on the module</h2><span class="sc">mgs_03 · manual 1.4</span></div>
+  <div class="loadgrid">
+    <div>
+      <div class="r"><span class="kc">alt › [ project ]</span><span class="a">opens the project page. <b>[ 1–8 ]</b> switch projects; x / y / z (press twice for xx / yy / zz) pick the bank of eight.</span></div>
+      <div class="r"><span class="kc">banks</span><span class="a"><b>x</b> 1–8 · <b>y</b> 9–16 · <b>z</b> 17–24 · <b>xx</b> 25–32 · <b>yy</b> 33–40 · <b>zz</b> 41–48. a lit button = that project folder exists.</span></div>
+      <div class="r"><span class="kc">[ /project ]</span><span class="a">sample loading: loads from the current project’s folder. <b>[ /wavs ]</b> and <b>[ /recs ]</b> are shared by every project.</span></div>
+      <div class="r"><span class="kc">[ ‹prev · next› ]</span><span class="a">step through the folder; long press jumps 5. press or latch the sound to audition while you browse.</span></div>
+    </div>
+    <div>
+      <div class="r"><span class="kc">file format</span><span class="a"><b>.wav · 48 khz · 16-bit · stereo · up to 32 s.</b> nothing else loads.</span></div>
+      <div class="r"><span class="kc">ordering</span><span class="a">/project and /wavs are indexed alphabetically; /recs newest first.</span></div>
+      <div class="r"><span class="kc">missing sample</span><span class="a">presets remember file names. rename or move a file on a computer and the sound comes up empty until it’s back.</span></div>
+      <div class="r"><span class="kc">hold [ project ] at boot</span><span class="a">collect + save every project: copies samples used from /wavs and /recs into each project folder.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec s-db" aria-labelledby="h-db">
+  <div class="sh"><span class="sn" style="background:#B668AA;color:#FFFFFF">04</span><h2 class="st" id="h-db">sample database</h2><span class="sc">mgs_04 · search · filter · sort</span></div>
+  <div class="ctl">
+    <div class="search"><label for="q">find ›</label><input id="q" type="search" placeholder="piano, vocal, vinyl, A#m, 6ix…" autocomplete="off" spellcheck="false"></div>
+    <div class="sel"><label for="fk">project</label><select id="fk"><option value="">all projects</option></select></div>
+    <div class="sel"><label for="fy">key</label><select id="fy"><option value="">any key</option></select></div>
+    <div class="sel"><label for="fp">pack</label><select id="fp"><option value="">all packs</option></select></div>
+  </div>
+  <div class="chips" id="cchips"><span class="lb">category ›</span></div>
+  <div class="count"><span id="cnt">loading…</span><button class="clear" id="reset" type="button">reset filters</button></div>
+  <table>
+    <colgroup><col class="c-proj"><col class="c-pos"><col class="c-cat"><col class="c-file"><col class="c-key"><col class="c-bpm"><col class="c-pack"><col class="c-sec"></colgroup>
+    <thead><tr>
+      <th scope="col"><button data-k="proj">project</button></th>
+      <th scope="col"><button data-k="pos">#</button></th>
+      <th scope="col"><button data-k="cat">category</button></th>
+      <th scope="col"><button data-k="file">file</button></th>
+      <th scope="col"><button data-k="key">key</button></th>
+      <th scope="col"><button data-k="bpm">bpm</button></th>
+      <th scope="col" class="pack"><button data-k="pack">source pack</button></th>
+      <th scope="col" class="sec"><button data-k="sec">sec</button></th>
+    </tr></thead>
+    <tbody id="tb"></tbody>
+  </table>
+  <div class="empty" id="empty" hidden>nothing matches. try fewer filters.</div>
+  <div class="more" id="more" hidden><button type="button" id="moreb">show 200 more</button><button type="button" id="allb">show all</button></div>
+  <p class="note">key and bpm come from the file names; blank = the name doesn’t say.</p>
+</section>
+
+</main>
+
+<footer>
+  <div>design homage to the <a href="https://www.marvel.com/comics/guides/1556/house-of-xpowers-of-x">house of x / powers of x</a> data pages, designed by tom muller with jonathan hickman<br>samples from splice packs, curated for personal use · not affiliated with intellijel, splice or marvel</div>
+  <div>conceived by <a href="https://github.com/mellotom">mellotom</a> · multigrain-sd<br>created with claude</div>
+</footer>
+</div>
+
+<script>
+(function(){
+var root=document.documentElement;
+function setTheme(t,save){if(t==='alt')root.setAttribute('data-theme','alt');else{root.removeAttribute('data-theme');t='native';}document.querySelectorAll('.tm[data-t]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.t===t));});if(save){try{localStorage.setItem('hn-mode',t==='alt'?'dark':'light');}catch(e){}}}
+setTheme(root.getAttribute('data-theme')==='alt'?'alt':'native',false);
+document.querySelectorAll('.tm[data-t]').forEach(function(b){b.addEventListener('click',function(){setTheme(b.dataset.t,true);});});
+
+var CC={key:'#00AEEF',pad:'#B668AA',sng:'#FCAF17',stk:'#70C057',tex:'var(--im)',vox:'#ED2B43'};
+var CNAME={key:'keys',pad:'pads',sng:'songstarters',stk:'melodic stacks',tex:'textures',vox:'vocals'};
+var CDESC={key:'piano, electric piano, mallets, guitar, mandolin, synth leads',pad:'pads, strings, drones',sng:'full songstarter loops, several parts at once',stk:'layered melodic stacks',tex:'fx, foley, noise, radio, vinyl, field recordings',vox:'vocal hooks, phrases, chops, dialogue'};
+var KC=['#00AEEF','#B668AA','#FCAF17','#70C057','#ED2B43','#FFDE16','#D23C9E','#00AEEF'];
+var D,ROWS=[],state={q:'',proj:'',key:'',pack:'',cats:new Set(),sort:null,dir:1,shown:200};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function pad2(n){return String(n).padStart(2,'0');}
+fetch('data.json').then(function(r){return r.json();}).then(function(d){D=d;init();}).catch(function(){document.getElementById('cnt').textContent='could not load data.json';});
+
+function init(){
+  document.getElementById('rev').textContent=D.v;
+  var P={};D.projects.forEach(function(p){P[p.n]=p;});
+  ROWS=D.rows.map(function(r){var c=D.cats[r[2]]||'';return{n:r[0],pos:r[1],c:c,file:r[3],p:r[4],k:r[5],b:r[6],sec:r[7],hay:(r[3]+' '+(r[4]>=0?D.packs[r[4]]:'')+' '+(P[r[0]]?P[r[0]].name:'')+' '+CNAME[c]+' '+r[5]).toLowerCase()};});
+  document.getElementById('st-n').textContent=ROWS.length.toLocaleString();
+  document.getElementById('st-p').textContent=D.packs.length;
+  document.getElementById('st-proj').textContent=D.projects.length;
+  var usedC=D.cats.filter(function(c){return ROWS.some(function(r){return r.c===c;});});
+  document.getElementById('st-c').textContent=usedC.length;
+  // projects
+  var h='';
+  D.projects.forEach(function(p,i){
+    var rs=ROWS.filter(function(r){return r.n===p.n;}),tot=rs.length,cnt={};
+    rs.forEach(function(r){cnt[r.c]=(cnt[r.c]||0)+1;});
+    var keys={};rs.forEach(function(r){if(r.k)keys[r.k]=(keys[r.k]||0)+1;});
+    var topk=Object.keys(keys).sort(function(a,b){return keys[b]-keys[a];}).slice(0,3).join(' · ');
+    var stack=usedC.map(function(c){return cnt[c]?'<i style="width:'+(cnt[c]/tot*100)+'%;background:'+CC[c]+'" title="'+CNAME[c]+' '+cnt[c]+'"></i>':'';}).join('');
+    var rg=usedC.map(function(c){return '<span class="d" style="background:'+CC[c]+'"></span><span'+(cnt[c]?'':' class="z"')+'>'+CNAME[c]+'</span><span class="n'+(cnt[c]?'':' z')+'">'+(cnt[c]||'—')+'</span>';}).join('');
+    var bank='';for(var j=1;j<=8;j++)bank+='<i'+(j===p.btn?' class="on"':'')+'></i>';
+    var kc=KC[i%KC.length];
+    h+='<button type="button" class="pj" data-n="'+p.n+'" aria-pressed="false" style="--kc:'+kc+'"><span class="kh"><span class="kno">'+pad2(p.n)+'</span><span class="kn">'+esc(p.name)+'</span></span><span class="km"><span>'+esc(p.p)+'/</span><span>'+tot+' files</span></span><span class="km"><span>bank '+p.bank+' · button '+p.btn+'</span><span>'+(topk?esc(topk):'')+'</span></span><span class="bankrow" aria-hidden="true">'+bank+'</span><span class="stack" aria-hidden="true">'+stack+'</span><span class="ranges">'+rg+'</span></button>';
+  });
+  var K=document.getElementById('proj');K.innerHTML=h;
+  K.addEventListener('click',function(e){var b=e.target.closest('.pj');if(!b)return;var v=b.dataset.n;state.proj=(state.proj===v)?'':v;document.getElementById('fk').value=state.proj;state.shown=200;render();if(state.proj)document.getElementById('h-db').scrollIntoView({behavior:'smooth',block:'start'});});
+  if(D.empty&&D.empty.length){var e=document.getElementById('empties');e.hidden=false;e.textContent='also on the card, no samples yet: '+D.empty.join(' · ');}
+  // category map
+  document.getElementById('cats').innerHTML=usedC.map(function(c){var n=ROWS.filter(function(r){return r.c===c;}).length;return '<div class="cat"><i style="background:'+CC[c]+'"></i><span class="kc">'+c+'_nn_</span><span>'+CDESC[c]+'</span><span class="ct">'+n+'</span></div>';}).join('');
+  // selects
+  var fk=document.getElementById('fk');D.projects.forEach(function(p){fk.insertAdjacentHTML('beforeend','<option value="'+p.n+'">'+pad2(p.n)+' · '+esc(p.name)+'</option>');});
+  var kc={};ROWS.forEach(function(r){if(r.k)kc[r.k]=(kc[r.k]||0)+1;});
+  var NO={C:0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,F:5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11};
+  var fy=document.getElementById('fy');Object.keys(kc).sort(function(a,b){var ra=a.replace(/m$|maj7$/,''),rb=b.replace(/m$|maj7$/,'');return (NO[ra]-NO[rb])||a.localeCompare(b);}).forEach(function(k){fy.insertAdjacentHTML('beforeend','<option value="'+esc(k)+'">'+esc(k)+' ('+kc[k]+')</option>');});
+  var pc={};ROWS.forEach(function(r){pc[r.p]=(pc[r.p]||0)+1;});
+  var fp=document.getElementById('fp');D.packs.forEach(function(p,i){fp.insertAdjacentHTML('beforeend','<option value="'+i+'">'+esc(p)+' ('+pc[i]+')</option>');});
+  var ch=document.getElementById('cchips');usedC.forEach(function(c){ch.insertAdjacentHTML('beforeend','<button type="button" class="chip" data-c="'+c+'" aria-pressed="false"><i style="background:'+CC[c]+'"></i>'+CNAME[c]+'</button>');});
+  ch.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var c=b.dataset.c;state.cats.has(c)?state.cats.delete(c):state.cats.add(c);state.shown=200;render();});
+  var qt;document.getElementById('q').addEventListener('input',function(e){clearTimeout(qt);qt=setTimeout(function(){state.q=e.target.value.trim().toLowerCase();state.shown=200;render();},120);});
+  fk.addEventListener('change',function(){state.proj=fk.value;state.shown=200;render();});
+  fy.addEventListener('change',function(){state.key=fy.value;state.shown=200;render();});
+  fp.addEventListener('change',function(){state.pack=fp.value;state.shown=200;render();});
+  document.querySelectorAll('th button').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.k;if(state.sort===k)state.dir=-state.dir;else{state.sort=k;state.dir=1;}render();});});
+  document.getElementById('reset').addEventListener('click',function(){state={q:'',proj:'',key:'',pack:'',cats:new Set(),sort:null,dir:1,shown:200};document.getElementById('q').value='';fk.value='';fy.value='';fp.value='';render();});
+  document.getElementById('moreb').addEventListener('click',function(){state.shown+=200;render();});
+  document.getElementById('allb').addEventListener('click',function(){state.shown=1e9;render();});
+  render();
+}
+var KEY={proj:function(r){return r.n*1000+r.pos;},pos:function(r){return r.pos;},cat:function(r){return r.c+pad2(r.n)+String(r.pos).padStart(3,'0');},file:function(r){return r.file.toLowerCase();},key:function(r){return r.k||'~';},bpm:function(r){return r.b||999;},pack:function(r){return r.p>=0?D.packs[r.p].toLowerCase():'~';},sec:function(r){return r.sec;}};
+function render(){
+  var terms=state.q?state.q.split(/\s+/):[];
+  var out=ROWS.filter(function(r){
+    if(state.proj!==''&&r.n!==+state.proj)return false;
+    if(state.key!==''&&r.k!==state.key)return false;
+    if(state.pack!==''&&r.p!==+state.pack)return false;
+    if(state.cats.size&&!state.cats.has(r.c))return false;
+    for(var i=0;i<terms.length;i++)if(r.hay.indexOf(terms[i])<0)return false;
+    return true;});
+  if(state.sort){var kf=KEY[state.sort],d=state.dir;out.sort(function(a,b){var x=kf(a),y=kf(b);return x<y?-d:x>y?d:(a.n-b.n)||(a.pos-b.pos);});}
+  document.querySelectorAll('th button').forEach(function(b){if(b.dataset.k===state.sort)b.setAttribute('data-dir',state.dir>0?'↑':'↓');else b.removeAttribute('data-dir');});
+  document.querySelectorAll('.pj').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.n===state.proj));});
+  document.querySelectorAll('.chip').forEach(function(b){b.setAttribute('aria-pressed',String(state.cats.has(b.dataset.c)));});
+  var sl=out.slice(0,state.shown);
+  document.getElementById('tb').innerHTML=sl.map(function(r){
+    return '<tr><td class="m fo">Project'+pad2(r.n)+'</td><td class="num">'+r.pos+'</td><td class="ct"><span class="ctag"><i style="background:'+CC[r.c]+'"></i>'+CNAME[r.c]+'</span></td><td class="m fn" title="'+esc(r.file)+'">'+esc(r.file)+'</td><td class="key">'+esc(r.k)+'</td><td class="m bpm">'+(r.b||'')+'</td><td class="pack">'+(r.p>=0?esc(D.packs[r.p]):'')+'</td><td class="m sec">'+r.sec.toFixed(2)+'</td></tr>';}).join('');
+  var active=(state.q||state.proj!==''||state.key!==''||state.pack!==''||state.cats.size);
+  document.getElementById('cnt').innerHTML='<b>'+out.length.toLocaleString()+'</b> of '+ROWS.length.toLocaleString()+' samples'+(active?' match':'')+(out.length>sl.length?' · showing '+sl.length:'');
+  document.getElementById('empty').hidden=out.length>0;
+  document.getElementById('more').hidden=out.length<=sl.length;
+}
+})();
+</script>
+</body>
+</html>
