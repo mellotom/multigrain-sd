@@ -186,6 +186,7 @@ td.key,td.bpm{display:none}
   <div>
     <div>source <span class="dots">..........</span> <a href="https://intellijel.com/shop/eurorack/multigrain/">multigrain manual 1.4</a></div>
     <div>rev <span class="dots">...........................</span> <span id="rev">—</span></div>
+    <div class="gc" data-l="39" style="visibility: hidden">visitors</div>
   </div>
 </div>
 
@@ -365,5 +366,7 @@ function render(){
 }
 })();
 </script>
+<script data-goatcounter="https://mellotom.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>(function(){var e=document.querySelector('.gc');if(!e||!window.fetch)return;var p=e.getAttribute('data-path')||location.pathname,L=+e.getAttribute('data-l')||40;fetch('https://mellotom.goatcounter.com/counter/'+encodeURIComponent(p)+'.json').then(function(r){return r.ok?r.json():null}).then(function(j){if(!j||j.count==null)return;var n=String(j.count).trim();e.textContent='visitors '+new Array(Math.max(3,L-9-n.length)).join('.')+' '+n;e.style.visibility='visible';}).catch(function(){});})();</script>
 </body>
 </html>
